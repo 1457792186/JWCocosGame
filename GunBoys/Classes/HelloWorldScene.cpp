@@ -48,6 +48,11 @@ bool HelloWorld::init()
     closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
                                 origin.y + closeItem->getContentSize().height/2));
 
+    
+    //创建进入下个视图的按钮
+    auto nextItem = MenuItemImage::create("match_renew_uncollect", "match_renew_uncollect", CC_CALLBACK_1(HelloWorld::menuNextCallBack, this));
+    nextItem->setPosition(Vec2(origin.x + visibleSize.width/2 - nextItem->getContentSize().width/2,origin.y + nextItem->getContentSize().height/2));
+    
    // 创建一个可自释放的菜单
     auto menu = Menu::create(closeItem, NULL);
     menu->setPosition(Vec2::ZERO);
@@ -92,10 +97,13 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
     exit(0);
 #endif
     
-    /*To navigate back to native iOS screen(if present) without quitting the application  ,do not use Director::getInstance()->end() and exit(0) as given above,instead trigger a custom event created in RootViewController.mm as below*/
-    
-    //EventCustom customEndEvent("game_scene_close_event");
-    //_eventDispatcher->dispatchEvent(&customEndEvent);
-    
-    
 }
+
+//进入下个视图
+void HelloWorld::menuNextCallBack(Ref * sender){
+    //新建MainScene自动释放实例
+    auto scene = MainScene::createScene();
+    //将MainScene替换当前scene
+    Director::getInstance()->replaceScene(scene);
+}
+
