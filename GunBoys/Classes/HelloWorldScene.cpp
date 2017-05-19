@@ -45,22 +45,23 @@ bool HelloWorld::init()
                                            CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
     // 设置关闭按钮的显示位置
     // 显示在可视屏幕的右下角
-    closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
-                                origin.y + closeItem->getContentSize().height/2));
+    closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width/2 - 10,
+                                origin.y + closeItem->getContentSize().height/2 + 10));
 
     
     //创建进入下个视图的按钮
-    auto nextItem = MenuItemImage::create("match_renew_uncollect", "match_renew_uncollect", CC_CALLBACK_1(HelloWorld::menuNextCallBack, this));
-    nextItem->setPosition(Vec2(origin.x + visibleSize.width/2 - nextItem->getContentSize().width/2,origin.y + nextItem->getContentSize().height/2));
+    auto nextItem = MenuItemImage::create("nextBtnImage.png", "nextBtnImage.png", CC_CALLBACK_1(HelloWorld::menuNextCallBack, this));
+    nextItem->setPosition(Vec2(origin.x + visibleSize.width/2 - nextItem->getContentSize().width/2,
+                               origin.y + nextItem->getContentSize().height/2 + 10));
     
    // 创建一个可自释放的菜单
-    auto menu = Menu::create(closeItem, NULL);
+    auto menu = Menu::create(closeItem,nextItem, NULL);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 
     //创建一个显示"Defend Kiana"文字的Label
     
-    auto label = Label::createWithTTF("Defend Kiana", "fonts/Marker Felt.ttf", 24);
+    auto label = Label::createWithTTF("Hello Master", "fonts/Marker Felt.ttf", 24);
     
     // 设置label在屏幕中的显示位置
     label->setPosition(Vec2(origin.x + visibleSize.width/2,
@@ -70,7 +71,7 @@ bool HelloWorld::init()
     this->addChild(label, 1);
 
     // 创建一个带图片的精灵
-    auto sprite = Sprite::create("HelloWorld.png");
+    auto sprite = Sprite::create("Kiana.png");
 
     // 设置图片精灵的显示位置
     sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
